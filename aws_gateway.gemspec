@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'aws_gateway'
   s.version     = '0.0.0'
-  s.date        = '12/12/2017'
+  s.date        = '2017-12-12'
   s.summary     = "Enables upload and download from AWS services"
   s.description = "A gatewqay service to AWS services and file storage"
   s.authors     = ["Nigel Surtees"]
