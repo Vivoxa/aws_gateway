@@ -2,11 +2,11 @@ class S3Helper
 
     DEFAULT_FILE_EXT = 'pdf'.freeze
 
-    def upload_to_S3(year, business, report_type, file_location, ext = DEFAULT_FILE_EXT)
+    def upload_to_S3(year, business_npwd, report_type, file_location, ext = DEFAULT_FILE_EXT)
       s3 = Aws::S3::Resource.new
 
       # Create the object to upload
-      s3_desired_filename = build_filename( year, business, report_type, ext)
+      s3_desired_filename = build_filename(year, business_npwd, report_type, ext)
       obj = s3.bucket(report_bucket_name).object(s3_desired_filename)
       # Upload it
       obj.upload_file(file_location)
@@ -15,8 +15,8 @@ class S3Helper
 
     private
 
-    def build_filename(year, business, report_type, ext = DEFAULT_FILE_EXT)
-      "#{report_type}_#{year}_#{business.NPWD}.#{ext}"
+    def build_filename(year, business_npwd, report_type, ext = DEFAULT_FILE_EXT)
+      "#{report_type}_#{year}_#{business_npwd}.#{ext}"
     end
 
     def environment()
