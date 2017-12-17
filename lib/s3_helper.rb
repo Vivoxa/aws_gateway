@@ -1,6 +1,7 @@
 class S3Helper
 
   DEFAULT_FILE_EXT = 'pdf'.freeze
+  TMP_FILEPATH = 'public/filetest.pdf'.freeze
 
   def upload_to_S3(year, business_npwd, report_type, file_location, ext = DEFAULT_FILE_EXT)
     s3 = Aws::S3::Resource.new
