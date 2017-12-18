@@ -28,7 +28,7 @@ class S3ReportHelper
   private
 
   def default_template_download_location(report_type, ext = DEFAULT_FILE_EXT)
-    @tmp_filepath + "default_#{report_type}.#{ext}"
+    @tmp_filepath + "/default_#{report_type}.#{ext}"
   end
 
   def build_filename(year, business_npwd, report_type, ext = DEFAULT_FILE_EXT)
