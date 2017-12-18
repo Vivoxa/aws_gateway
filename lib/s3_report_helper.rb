@@ -1,7 +1,12 @@
-class S3Helper
+# frozen_string_literal: true
 
-  DEFAULT_FILE_EXT = 'pdf'.freeze
-  TMP_FILEPATH = 'public/filetest.pdf'.freeze
+# class to fetch and store report related artifacts in S3
+class S3ReportHelper
+  DEFAULT_FILE_EXT = 'pdf'
+
+  def initialize(local_temp_dir)
+    @tmp_filepath = local_temp_dir
+  end
 
   def upload_to_S3(year, business_npwd, report_type, file_location, ext = DEFAULT_FILE_EXT)
     s3 = Aws::S3::Resource.new
@@ -15,15 +20,15 @@ class S3Helper
 
   def get_default_template(report_type, ext = DEFAULT_FILE_EXT)
     s3 = Aws::S3::Client.new
-    resp = s3.get_object({bucket: template_bucket_name, key: "default_#{report_type}.#{ext}"}, target: TMP_FILEPATH)
-    resp.body
+    target = default_template_download_location(report_type, ext)
+    resp = s3.get_object({bucket: template_bucket_name, key: "default_#{report_type}.#{ext}"}, target: target)
+    { response_body: resp.body, target: target }
   end
 
   private
 
-  def cleanup(year, business)
-    path_to_save_file = tmp_filename(year, business)
-    FileUtils.rm [path_to_save_file], force: true
+  def default_template_download_location(report_type, ext = DEFAULT_FILE_EXT)
+    @tmp_filepath + "/default_#{report_type}.#{ext}"
   end
 
   def build_filename(year, business_npwd, report_type, ext = DEFAULT_FILE_EXT)
@@ -37,6 +42,7 @@ class S3Helper
   def report_bucket_name
     "#{environment}-pwpr-reports"
   end
+
   def template_bucket_name
     "#{environment}-pwpr-templates"
   end
