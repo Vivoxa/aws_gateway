@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.files       = ["lib/aws_gateway.rb", "lib/s3_helper.rb"]
   s.homepage    = 'https://github.com/Vivoxa/aws_gateway'
 
-  s.add_dependency 'aws-sdk', '2-10-104'
+  s.add_dependency 'aws-sdk', '2.10.104'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'renogen', '1.2.0'
 end
