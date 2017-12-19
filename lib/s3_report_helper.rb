@@ -4,17 +4,19 @@
 class S3ReportHelper
   DEFAULT_FILE_EXT = 'pdf'
 
+  attr_accessor :tmp_filepath
+
   def initialize(local_temp_dir)
     @tmp_filepath = local_temp_dir
   end
 
   def get_report(year, business_npwd, report_type, ext = DEFAULT_FILE_EXT)
-    s3 = Aws::S3::Client.new
-    s3_filename = build_filename(year, business_npwd, report_type, ext)
-    target = @tmp_filepath + '/' + s3_filename
-    resp = s3.get_object({ bucket: report_bucket_name, key: s3_filename, target: target })
     require 'pry'
     binding.pry
+    s3 = Aws::S3::Client.new
+    s3_filename = build_filename(year, business_npwd, report_type, ext)
+    target = tmp_filepath + '/' + s3_filename
+    resp = s3.get_object(bucket: report_bucket_name, key: s3_filename, target: target )
     resp
   end
 
