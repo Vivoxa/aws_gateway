@@ -11,13 +11,11 @@ class S3ReportHelper
   end
 
   def get_report(year, business_npwd, report_type, ext = DEFAULT_FILE_EXT)
-    require 'pry'
-    binding.pry
     s3 = Aws::S3::Client.new
     s3_filename = build_filename(year, business_npwd, report_type, ext)
     target = tmp_filepath + '/' + s3_filename
     resp = s3.get_object(bucket: report_bucket_name, key: s3_filename, target: target )
-    resp
+    { response_body: resp.body, target: target }
   end
 
   def upload_to_S3(year, business_npwd, report_type, file_location, ext = DEFAULT_FILE_EXT)
