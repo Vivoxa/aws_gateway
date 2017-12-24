@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'aws-sdk', '~> 2'
   s.add_development_dependency 'pry-byebug'
   s.add_development_dependency 'renogen', '1.2.0'
+  s.add_development_dependency 'rspec'
 end
