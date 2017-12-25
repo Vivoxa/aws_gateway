@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe S3ReportHelper do
+RSpec.describe AwsGateway::S3ReportHelper do
   # test class
   class DummyAwsClient
     attr_accessor :options, :target
