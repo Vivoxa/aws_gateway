@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    aws_gateway (0.0.5)
+    aws_gateway (1.0.0)
       aws-sdk (~> 2)
 
 GEM
