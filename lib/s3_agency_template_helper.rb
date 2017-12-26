@@ -19,7 +19,7 @@ module AwsGateway
     private
 
     def s3_build_filename(year, scheme_id, filename)
-      "#{AgencyTemplateAwsHandler::S3_FILE_AGENCY_TEMPLATE_IDENTIFIER}-#{year}-#{scheme_id}-#{filename}"
+      "#{S3AgencyTemplateHelper::S3_FILE_AGENCY_TEMPLATE_IDENTIFIER}-#{year}-#{scheme_id}-#{filename}"
     end
 
     def bucket_name
